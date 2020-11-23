@@ -26,7 +26,7 @@ class ModelMapper {
     }
 
     static Ladder getLadder(int sizeOfPersons) {
-        return new Ladder(sizeOfPersons,
+        return Ladder.of(sizeOfPersons,
                 RequestView.askLadderHeight()
                         .getHeight(),
                 RandomDirectionStrategy.getInstance()

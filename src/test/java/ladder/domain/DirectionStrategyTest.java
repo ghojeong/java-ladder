@@ -39,7 +39,7 @@ class DirectionStrategyTest {
     @DisplayName("reset 을 하면 DOWN 으로 초기화 되는 테스트")
     void reset() {
         strategy.reset();
-        Supplier<Direction> generate = () -> strategy.get();
+        Supplier<Direction> generate = strategy::get;
         Supplier<Direction> resetAndGenerate = () -> {
             strategy.reset();
             return strategy.get();

@@ -16,15 +16,19 @@ public class Ladder {
         this.lines = lines;
     }
 
-    public Ladder(int sizeOfPersons, int height, DirectionStrategy directionStrategy) {
-        lines = Stream.generate(() -> {
-            Line line = IntStream.range(0, sizeOfPersons)
+    public static Ladder of(int sizeOfPersons, int height, DirectionStrategy directionStrategy) {
+        return Stream.generate(() -> {
+            directionStrategy.reset();
+            return IntStream.range(0, sizeOfPersons)
                     .mapToObj(position -> new Point(position, directionStrategy.get()))
                     .collect(collectingAndThen(toList(), Line::new));
-            directionStrategy.reset();
-            return line;
-        }).limit(height)
-                .collect(toList());
+        })
+                .limit(height)
+                .collect(collectingAndThen(toList(), Ladder::of));
+    }
+
+    private static Ladder of(List<Line> lines) {
+        return new Ladder(lines);
     }
 
     public int move(int position) {

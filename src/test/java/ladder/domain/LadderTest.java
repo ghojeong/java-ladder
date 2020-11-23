@@ -85,7 +85,7 @@ class LadderTest {
     void constructor() {
         int height = 3;
         int sizeOfPersons = 5;
-        Ladder ladder = new Ladder(sizeOfPersons, height, new DirectionStrategy() {
+        Ladder ladder = Ladder.of(sizeOfPersons, height, new DirectionStrategy() {
             @Override
             Direction get() {
                 return get(false);
